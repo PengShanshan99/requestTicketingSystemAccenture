@@ -75,7 +75,6 @@ class ToDoList extends Component {
     return (
       <div className="to-do-list-container">
         <div className="row">
-          {this.renderAddForm()}
           {this.renderToDos()}
         </div>
         <div className="fixed-action-btn">
