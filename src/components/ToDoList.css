@@ -9,7 +9,10 @@
 }
 
 .to-do-list-item h4 {
-  padding-left: 25px;
+  padding-bottom: 5px;
+  color: black;
+}
+.to-do-list-item h6 {
   padding-bottom: 5px;
 }
 
