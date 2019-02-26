@@ -16,6 +16,10 @@
   padding-bottom: 5px;
 }
 
+.to-do-list-item input {
+  padding-bottom: 5px;
+}
+
 .to-do-list-item:hover {
   background-color: #26a69a !important;
 }

@@ -8,7 +8,10 @@ import ToDoListItem from "./ToDoListItem";
 class ToDoList extends Component {
   state = {
     addFormVisible: false,
-    addFormValue: ""
+    addFormValue: "",
+    checkedPassword: true,
+    checkedRecruit: true,
+    checkedTech: true
   };
 
   handleInputChange = event => {
@@ -23,33 +26,79 @@ class ToDoList extends Component {
     this.setState({ addFormValue: "" });
   };
 
-  renderAddForm = () => {
-    const { addFormVisible, addFormValue } = this.state;
-    if (addFormVisible) {
-      return (
-        <div id="todo-add-form" className="col s10 offset-s1">
-          <form onSubmit={this.handleFormSubmit}>
-            <div className="input-field">
-              <i className="material-icons prefix">note_add</i>
-              <input
-                value={addFormValue}
-                onChange={this.handleInputChange}
-                id="toDoNext"
-                type="text"
-              />
-              <label htmlFor="toDoNext">What To Do Next</label>
-            </div>
-          </form>
-        </div>
-      );
-    }
-  };
+  handleCheckTech = event =>{
+    this.setState({checkedTech: !this.state.checkedTech});
+  }
+  renderCheckboxTech = () =>{
+    return (<div>
+      <form action="#">
+      <label>
+        <input
+          name="isGoing"
+          type="checkbox"
+          checked={this.state.checkedTech}
+          onChange={this.handleCheckTech} />
+        <span>Tech</span>
+      </label>
+      <br />
+    </form>
+    </div>
+  );
+  }
+
+
+  handleCheckPassword = event =>{
+    this.setState({checkedPassword: !this.state.checkedPassword});
+  }
+  renderCheckboxPassword = () =>{
+    return (<div>
+      <form action="#">
+      <label>
+        <input
+          name="isGoing"
+          type="checkbox"
+          checked={this.state.checkedPassword}
+          onChange={this.handleCheckPassword} />
+        <span>Password</span>
+      </label>
+      <br />
+    </form>
+    </div>
+  );
+  }
+
+  handleCheckRecruit = event =>{
+    this.setState({checkedRecruit: !this.state.checkedRecruit});
+  }
+  renderCheckboxRecruit = () =>{
+    return (<div>
+      <form action="#">
+      <label>
+        <input
+          name="isGoing"
+          type="checkbox"
+          checked={this.state.checkedRecruit}
+          onChange={this.handleCheckRecruit} />
+        <span>Campus Recruit</span>
+      </label>
+      <br />
+    </form>
+    </div>
+  );
+  }
+
 
   renderToDos() {
     const { data } = this.props;
     const toDos = _.map(data, (value, key) => {
-      return <ToDoListItem key={key} todoId={key} todo={value} />;
-    });
+      return(
+      <div>
+        <ToDoListItem key={key} todoId={key} todo={value}
+          checkedTech={this.state.checkedTech}
+          checkedRecruit={this.state.checkedRecruit}
+          checkedPassword={this.state.checkedPassword}/>
+      </div>
+    );});
     if (!_.isEmpty(toDos)) {
       return toDos;
     }
@@ -75,6 +124,10 @@ class ToDoList extends Component {
     return (
       <div className="to-do-list-container">
         <div className="row">
+          <p>Showing categories:</p>
+          {this.renderCheckboxTech()}
+          {this.renderCheckboxPassword()}
+          {this.renderCheckboxRecruit()}
           {this.renderToDos()}
         </div>
       </div>
